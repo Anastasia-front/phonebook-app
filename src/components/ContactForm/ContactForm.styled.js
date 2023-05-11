@@ -23,6 +23,8 @@ export const Input = styled.input`
   border-radius: 3px;
 `;
 export const Submit = styled.button`
+  display: flex;
+  align-items: center;
   background-color: #ffecc8;
   border: 1px solid grey;
   border-radius: 3px;

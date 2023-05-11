@@ -2,11 +2,17 @@ import { Form, Label, Input, Submit } from './ContactForm.styled';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsOperations';
-import { selectContacts } from 'redux/selectors';
+import { selectContacts, selectError, selectIsLoading } from 'redux/selectors';
+import { Puff } from 'react-loading-icons';
+import { useState } from 'react';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+  const isGeneralLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -20,10 +26,20 @@ export default function ContactForm() {
     if (isDuplicate) {
       alert(`${name} is already in contacts`);
     } else {
+      setIsLoading(true);
       dispatch(addContact({ name, number }));
       form.reset();
     }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   };
+
+  // const setLoaderFalse = () => {
+  //   setIsLoading(false);
+  // };
+
+  // setLoaderFalse();
 
   const nameInputId = nanoid();
   const numberInputId = nanoid();
@@ -52,7 +68,13 @@ export default function ContactForm() {
           required
         />
       </Label>
-      <Submit>Add to contact</Submit>
+      {isLoading && !error && isGeneralLoading ? (
+        <Submit>
+          <Puff height={15} stroke="#000" style={{ padding: '0 20px' }} />
+        </Submit>
+      ) : (
+        <Submit>Add to contact</Submit>
+      )}
     </Form>
   );
 }

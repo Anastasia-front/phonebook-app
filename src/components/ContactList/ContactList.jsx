@@ -1,7 +1,7 @@
-import { Li, List, Delete } from './ContactList.styled';
-import { useSelector, useDispatch } from 'react-redux';
+import { Li, List } from './ContactList.styled';
+import { useSelector } from 'react-redux';
 import { selectContacts, selectFilter } from 'redux/selectors';
-import { deleteContact } from 'redux/contactsOperations';
+import { Contact } from 'components/Contact/Contact';
 
 const getVisibleTasks = (contacts, filter) => {
   const normilizedFilter = filter.toLowerCase();
@@ -14,18 +14,13 @@ const Items = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
   const visibleTasks = getVisibleTasks(contacts, filter);
-  const dispatch = useDispatch();
+
   return (
     <List>
       {visibleTasks.length ? (
         visibleTasks.map(({ id, name, number }) => (
           <Li key={id}>
-            <p>
-              {name}: {number}
-              <Delete onClick={() => dispatch(deleteContact(id))}>
-                Delete
-              </Delete>
-            </p>
+            <Contact id={id} name={name} number={number} />
           </Li>
         ))
       ) : (

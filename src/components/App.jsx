@@ -5,11 +5,11 @@ import Filter from './Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchContacts } from 'redux/contactsOperations';
-import { selectError, selectIsLoading } from 'redux/selectors';
+import { selectError } from 'redux/selectors';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
+  // const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
   useEffect(() => {
@@ -23,15 +23,15 @@ export const App = () => {
 
       <Section title="Contacts">
         <Filter />
-        {isLoading && !error && (
+        {/* {isLoading && !error && (
           <b style={{ marginLeft: 70 }}>Request in progress...</b>
-        )}
+        )} */}
         {error && (
           <b style={{ marginLeft: 70 }}>
             The operation failed with error: ${error}
           </b>
         )}
-        {!isLoading && !error && <ContactList />}
+        {!error && <ContactList />}
       </Section>
     </div>
   );
