@@ -1,38 +1,77 @@
-import Section from './Section';
-import ContactForm from './ContactForm';
-import ContactList from './ContactList';
-import Filter from './Filter';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchContacts } from 'redux/contactsOperations';
-import { selectError } from 'redux/selectors';
+import { useEffect, lazy } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './Layout';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
+import { refreshUser } from 'redux/auth/operations';
+import { useAuth } from 'hooks';
+import { Toaster } from 'react-hot-toast';
+
+const HomePage = lazy(() => import('../pages/Home'));
+const RegisterPage = lazy(() => import('../pages/Register'));
+const LoginPage = lazy(() => import('../pages/Login'));
+const ContactsPage = lazy(() => import('../pages/Contacts'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  // const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
-  return (
-    <div>
-      <Section title="Phonebook">
-        <ContactForm />
-      </Section>
 
-      <Section title="Contacts">
-        <Filter />
-        {/* {isLoading && !error && (
-          <b style={{ marginLeft: 70 }}>Request in progress...</b>
-        )} */}
-        {error && (
-          <b style={{ marginLeft: 70 }}>
-            The operation failed with error: ${error}
-          </b>
-        )}
-        {!error && <ContactList />}
-      </Section>
+  return isRefreshing ? (
+    <div style={{ position: 'relative' }}>
+      <h1
+        style={{
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+      >
+        Refreshing user...
+      </h1>
     </div>
+  ) : (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<RegisterPage />}
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<LoginPage />}
+              />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+            }
+          />
+        </Route>
+      </Routes>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          duration: 5000,
+        }}
+      />
+    </>
   );
 };

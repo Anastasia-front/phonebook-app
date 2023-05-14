@@ -1,6 +1,6 @@
 import { Li, List } from './ContactList.styled';
 import { useSelector } from 'react-redux';
-import { selectContacts, selectFilter } from 'redux/selectors';
+import { selectContacts, selectFilter } from 'redux/contacts/selectors';
 import { Contact } from 'components/Contact/Contact';
 
 const getVisibleTasks = (contacts, filter) => {
@@ -24,7 +24,9 @@ const Items = () => {
           </Li>
         ))
       ) : (
-        <h3>There are no contacts in your phonebook</h3>
+        <h3 style={{ textAlign: 'center' }}>
+          There are no contacts in your phonebook
+        </h3>
       )}
     </List>
   );

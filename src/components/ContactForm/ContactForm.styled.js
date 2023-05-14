@@ -1,36 +1,41 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  border: 1px solid black;
-  margin-left: 40px;
-  padding: 15px;
+  box-shadow: 0px 1px 8px 5px rgba(0, 0, 0, 0.33);
+  background-color: rgb(245, 255, 251);
+  padding: 25px 15px 15px 15px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
+  align-items: flex;
+  gap: 25px;
   width: 200px;
 `;
 
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
-  gap: 10px;
   font-size: 16px;
 `;
-export const Input = styled.input`
-  background-color: #f5fffb;
-  border: 1px solid #ababab;
-  border-radius: 3px;
-`;
-export const Submit = styled.button`
+
+export const BoxSection = styled.form`
+  box-shadow: 0px 1px 8px 5px rgba(0, 0, 0, 0.33);
+  background-color: rgb(245, 255, 251);
+  padding: 15px;
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 25px;
+  min-width: 200px;
+`;
+
+export const TwoSections = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  background-color: #ffecc8;
-  border: 1px solid grey;
-  border-radius: 3px;
-  padding: 3px;
-  &:hover,
-  &:active {
-    background-color: teal;
+  @media screen and (min-width: 600px) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
   }
 `;

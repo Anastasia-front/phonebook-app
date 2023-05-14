@@ -1,10 +1,11 @@
-import { Delete } from 'components/ContactList/ContactList.styled';
 import { Puff } from 'react-loading-icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectError } from 'redux/selectors';
+import { selectError } from 'redux/contacts/selectors';
 import { useState } from 'react';
-
-import { deleteContact } from 'redux/contactsOperations';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { ContactLi } from './Contact.styled';
+import { deleteContact } from 'redux/contacts/contactsOperations';
 
 export const Contact = ({ id, name, number }) => {
   const error = useSelector(selectError);
@@ -16,22 +17,29 @@ export const Contact = ({ id, name, number }) => {
   };
 
   return (
-    <p>
-      {name}: {number}
+    <ContactLi>
+      <p style={{ fontFamily: 'Caveat', fontWeight: '400', fontSize: 18 }}>
+        {name}: {number}
+      </p>
       {isLoading && !error ? (
-        <Delete>
-          <Puff height={12} stroke="#000" />
-        </Delete>
+        <Button style={{ marginLeft: 7, height: 36 }} variant="contained">
+          <Puff height={18} stroke="#fff" style={{ padding: '0.5px 7px' }} />
+        </Button>
       ) : (
-        <Delete
+        <Button
+          type="button"
+          style={{ marginLeft: 7, height: 36 }}
+          variant="contained"
+          endIcon={<DeleteIcon />}
+          size="small"
           onClick={() => {
             dispatch(deleteContact(id));
             loader();
           }}
         >
           Delete
-        </Delete>
+        </Button>
       )}
-    </p>
+    </ContactLi>
   );
 };

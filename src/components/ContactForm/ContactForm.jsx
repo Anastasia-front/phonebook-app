@@ -1,10 +1,16 @@
-import { Form, Label, Input, Submit } from './ContactForm.styled';
+import { Form, Label } from './ContactForm.styled';
+import { Input } from '@mui/material';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsOperations';
-import { selectContacts, selectError, selectIsLoading } from 'redux/selectors';
+import { addContact } from 'redux/contacts/contactsOperations';
+import {
+  selectContacts,
+  selectError,
+  selectIsLoading,
+} from 'redux/contacts/selectors';
 import { Puff } from 'react-loading-icons';
 import { useState } from 'react';
+import { Button } from '@mui/material';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
@@ -35,20 +41,18 @@ export default function ContactForm() {
     }, 1000);
   };
 
-  // const setLoaderFalse = () => {
-  //   setIsLoading(false);
-  // };
-
-  // setLoaderFalse();
-
   const nameInputId = nanoid();
   const numberInputId = nanoid();
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Label htmlFor={nameInputId}>
+      <Label
+        htmlFor={nameInputId}
+        style={{ fontFamily: 'Caveat', fontWeight: '600' }}
+      >
         Name
         <Input
+          color="primary"
           type="text"
           name="name"
           id={nameInputId}
@@ -57,9 +61,13 @@ export default function ContactForm() {
           required
         />
       </Label>
-      <Label htmlFor={numberInputId}>
+      <Label
+        htmlFor={numberInputId}
+        style={{ fontFamily: 'Caveat', fontWeight: '600' }}
+      >
         Number
         <Input
+          color="primary"
           type="tel"
           name="number"
           id={numberInputId}
@@ -69,11 +77,13 @@ export default function ContactForm() {
         />
       </Label>
       {isLoading && !error && isGeneralLoading ? (
-        <Submit>
-          <Puff height={15} stroke="#000" style={{ padding: '0 20px' }} />
-        </Submit>
+        <Button variant="contained" style={{ margin: '0 auto' }}>
+          <Puff height={24} stroke="#fff" style={{ padding: '0 40px' }} />
+        </Button>
       ) : (
-        <Submit>Add to contact</Submit>
+        <Button variant="contained" style={{ margin: '0 auto' }} type="submit">
+          Add to contact
+        </Button>
       )}
     </Form>
   );

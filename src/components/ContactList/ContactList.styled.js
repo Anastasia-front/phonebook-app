@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const List = styled.ul`
-  margin: 0 0 0 30px;
+  margin: 0 auto;
   list-style-type: circle;
+  padding: 0 0 0 15px;
 `;
 export const Li = styled.li`
   display: list-item;
