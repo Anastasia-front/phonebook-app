@@ -31,7 +31,7 @@ export const UserMenu = () => {
       <Name>Welcome, {user.name}</Name>
       {isLoading ? (
         <Button fullWidth variant="contained">
-          <Puff height={25} stroke="#fff" style={{ padding: '0 20px' }} />
+          <Puff height={24} stroke="#fff" style={{ padding: '0 16px' }} />
         </Button>
       ) : (
         <Button
