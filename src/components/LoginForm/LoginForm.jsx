@@ -1,25 +1,19 @@
-import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
 import { Form } from './LoginForm.styled';
 import { Button, TextField, Box, Container } from '@mui/material';
 import { Puff } from 'react-loading-icons';
 import { useSelector } from 'react-redux';
 import { selectAuthIsLoading } from 'redux/auth/selectors';
 
-export const LoginForm = () => {
-  const dispatch = useDispatch();
+export const LoginForm = ({ onData }) => {
   const isLoading = useSelector(selectAuthIsLoading);
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-
-    dispatch(
-      logIn({
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
+    onData({
+      email: form.elements.email.value,
+      password: form.elements.password.value,
+    });
 
     form.reset();
   };

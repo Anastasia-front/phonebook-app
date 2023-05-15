@@ -1,33 +1,28 @@
 import { LoginForm } from 'components/LoginForm/LoginForm';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
-import { selectAuthIsLoading, selectAuthError } from 'redux/auth/selectors';
-import { useState, useEffect } from 'react';
+import { selectAuthError } from 'redux/auth/selectors';
+import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/operations';
 
 export default function Login() {
-  const isLoading = useSelector(selectAuthIsLoading);
+  const dispatch = useDispatch();
   const status = useSelector(selectAuthError);
-  const [isRequestPending, setRequestPending] = useState(true);
 
-  useEffect(() => {
-    setRequestPending(false);
-
-    if (
-      status === 'Request failed with status code 400' &&
-      !isRequestPending &&
-      !isLoading
-    ) {
+  const onRegister = data => {
+    if (status === 'Request failed with status code 400') {
       toast.error(
         'You have entered an incorrect email address or password, or you have not yet registered!'
       );
     }
-  }, [isRequestPending, status, isLoading]);
+    dispatch(logIn(data));
+  };
 
   return (
     <div>
       <title>Login</title>
 
-      <LoginForm />
+      <LoginForm onData={onRegister} />
     </div>
   );
 }
