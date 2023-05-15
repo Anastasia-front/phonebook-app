@@ -12,9 +12,7 @@ const HomePage = lazy(() => import('../pages/Home'));
 const RegisterPage = lazy(() => import('../pages/Register'));
 const LoginPage = lazy(() => import('../pages/Login'));
 const ContactsPage = lazy(() => import('../pages/Contacts'));
-const NotFoundPage = lazy(() =>
-  import('../components/NotFoundPage/NotFoundPage')
-);
+const NotFoundPage = lazy(() => import('../components/NotFound/NotFound'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -40,13 +38,13 @@ export const App = () => {
   ) : (
     <>
       <Routes>
-        <Route path="/goit-react-hw-08-phonebook" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route
             path="register"
             element={
               <RestrictedRoute
-                redirectTo="contacts"
+                redirectTo="/contacts"
                 component={<RegisterPage />}
               />
             }
@@ -55,7 +53,7 @@ export const App = () => {
             path="login"
             element={
               <RestrictedRoute
-                redirectTo="contacts"
+                redirectTo="/contacts"
                 component={<LoginPage />}
               />
             }
@@ -63,7 +61,7 @@ export const App = () => {
           <Route
             path="contacts"
             element={
-              <PrivateRoute redirectTo="login" component={<ContactsPage />} />
+              <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
             }
           />
           <Route path="*" element={<NotFoundPage />} />

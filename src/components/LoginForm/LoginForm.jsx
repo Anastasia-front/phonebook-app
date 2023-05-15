@@ -6,20 +6,19 @@ import { Puff } from 'react-loading-icons';
 import { useSelector } from 'react-redux';
 import { selectAuthIsLoading } from 'redux/auth/selectors';
 
-export const LoginForm = ({ onData }) => {
+export const LoginForm = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAuthIsLoading);
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    onData(
-      dispatch(
-        logIn({
-          email: form.elements.email.value,
-          password: form.elements.password.value,
-        })
-      )
+
+    dispatch(
+      logIn({
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
     );
 
     form.reset();

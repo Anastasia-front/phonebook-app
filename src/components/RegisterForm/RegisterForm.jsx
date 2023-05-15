@@ -7,21 +7,20 @@ import { selectAuthIsLoading } from 'redux/auth/selectors';
 import { Form } from './RegisterForm.styled';
 import { Button, TextField, Box, Container } from '@mui/material';
 
-export const RegisterForm = ({ onData }) => {
+export const RegisterForm = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAuthIsLoading);
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    onData(
-      dispatch(
-        register({
-          name: form.elements.name.value,
-          email: form.elements.email.value,
-          password: form.elements.password.value,
-        })
-      )
+
+    dispatch(
+      register({
+        name: form.elements.name.value,
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
     );
 
     form.reset();

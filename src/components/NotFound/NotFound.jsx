@@ -1,4 +1,4 @@
-import { Center, Title, Description } from './NotFoundPage.styled';
+import { Center, Title, Description } from './NotFound.styled';
 import React, { useState, useEffect } from 'react';
 
 function RedirectingPage() {
