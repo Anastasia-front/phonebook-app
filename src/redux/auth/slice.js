@@ -77,6 +77,6 @@ const authSlice = createSlice({
     },
   },
 });
-export const { clearError } = authSlice.actions;
+// export const { clearError } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;
