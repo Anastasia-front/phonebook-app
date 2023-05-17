@@ -89,3 +89,7 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
+
+export const clearAuthError = () => ({
+  type: 'auth/clearError',
+});

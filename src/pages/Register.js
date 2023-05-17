@@ -3,18 +3,23 @@ import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { selectAuthError } from 'redux/auth/selectors';
 import { useDispatch } from 'react-redux';
-import { register } from 'redux/auth/operations';
+import { register, clearAuthError } from 'redux/auth/operations';
+import { useEffect } from 'react';
 
 export default function Register() {
   const dispatch = useDispatch();
   const status = useSelector(selectAuthError);
 
-  const onRegister = data => {
+  useEffect(() => {
     if (status === 'Request failed with status code 400') {
       toast.success(
         'You or someone else is already registered with such data!'
       );
+      dispatch(clearAuthError());
     }
+  }, [status, dispatch]);
+
+  const onRegister = data => {
     dispatch(register(data));
   };
 

@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logOut, refreshUser } from './operations';
+import {
+  register,
+  logIn,
+  logOut,
+  refreshUser,
+  // clearAuthError,
+} from './operations';
 
 export const initialState = {
   user: { name: null, email: null },
@@ -65,6 +71,12 @@ const authSlice = createSlice({
       state.isRefreshing = false;
     },
   },
+  reducers: {
+    clearError: state => {
+      state.error = null;
+    },
+  },
 });
+export const { clearError } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

@@ -2,10 +2,11 @@ import { Form } from './LoginForm.styled';
 import { Button, TextField, Box, Container } from '@mui/material';
 import { Puff } from 'react-loading-icons';
 import { useSelector } from 'react-redux';
-import { selectAuthIsLoading } from 'redux/auth/selectors';
+import { selectAuthIsLoading, selectAuthError } from 'redux/auth/selectors';
 
 export const LoginForm = ({ onData }) => {
   const isLoading = useSelector(selectAuthIsLoading);
+  const status = useSelector(selectAuthError);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -14,8 +15,9 @@ export const LoginForm = ({ onData }) => {
       email: form.elements.email.value,
       password: form.elements.password.value,
     });
-
-    form.reset();
+    if (!isLoading && status !== null) {
+      form.reset();
+    }
   };
 
   return (
