@@ -12,7 +12,7 @@ import { Puff } from 'react-loading-icons';
 import { useState } from 'react';
 import { Button } from '@mui/material';
 
-export default function ContactForm() {
+export default function ContactForm({ onClose }) {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const isGeneralLoading = useSelector(selectIsLoading);
@@ -35,6 +35,7 @@ export default function ContactForm() {
       setIsLoading(true);
       dispatch(addContact({ name, number }));
       form.reset();
+      onClose();
     }
     setTimeout(() => {
       setIsLoading(false);

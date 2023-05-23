@@ -22,13 +22,13 @@ export const Contact = ({ id, name, number }) => {
         {name}: {number}
       </p>
       {isLoading && !error ? (
-        <Button style={{ marginLeft: 7, height: 36 }} variant="contained">
-          <Puff height={18} stroke="#fff" style={{ padding: '0.5px 7px' }} />
+        <Button style={{ marginLeft: 25, height: 36 }} variant="contained">
+          <Puff height={18} stroke="#fff" style={{ padding: '0.5px 10.5px' }} />
         </Button>
       ) : (
         <Button
           type="button"
-          style={{ marginLeft: 7, height: 36 }}
+          style={{ marginLeft: 25, height: 36 }}
           variant="contained"
           endIcon={<DeleteIcon />}
           size="small"

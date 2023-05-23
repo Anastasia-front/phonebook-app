@@ -24,7 +24,7 @@ const Items = () => {
           </Li>
         ))
       ) : (
-        <h3 style={{ textAlign: 'center' }}>
+        <h3 style={{ textAlign: 'center', marginLeft: 70 }}>
           There are no contacts in your phonebook
         </h3>
       )}

@@ -13,5 +13,8 @@ export const Wrapper = styled.div`
 export const Name = styled.p`
   text-transform: uppercase;
   font-weight: 700;
-  width: 250%;
+
+  @media screen and (min-width: 540px) {
+    width: 250%;
+  }
 `;

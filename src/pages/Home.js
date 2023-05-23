@@ -9,11 +9,33 @@ const styles = {
   },
   title: {
     fontWeight: 500,
-    fontSize: 48,
+    fontSize: 24,
     textAlign: 'center',
     fontFamily: 'Times New Roman',
   },
 };
+
+const breakpoints = {
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+};
+
+const screenWidth = window.innerWidth;
+
+let fontSize = 24;
+if (screenWidth >= breakpoints.sm && screenWidth < breakpoints.md) {
+  fontSize = 28;
+} else if (screenWidth >= breakpoints.md && screenWidth < breakpoints.lg) {
+  fontSize = 32;
+} else if (screenWidth >= breakpoints.lg && screenWidth < breakpoints.xl) {
+  fontSize = 40;
+} else if (screenWidth >= breakpoints.xl) {
+  fontSize = 48;
+}
+
+styles.title.fontSize = fontSize;
 
 export default function Home() {
   return (
@@ -46,7 +68,6 @@ export default function Home() {
           </span>
         </p>
       </h1>
-      {/* </ParticlesGrowing> */}
     </div>
   );
 }
