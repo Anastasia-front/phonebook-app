@@ -55,7 +55,7 @@ const Contacts = () => {
                 <Close type="button" onClick={closeModal}>
                   x
                 </Close>
-                <Section title="Additor">
+                <Section title="Create">
                   <ContactForm onClose={closeModal} style={{ maxWidth: 500 }} />
                 </Section>
               </BackGround>

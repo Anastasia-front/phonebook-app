@@ -28,7 +28,7 @@ export const UserMenu = () => {
 
   return (
     <Wrapper>
-      <Name>Welcome, {user.name}</Name>
+      <Name>Welcome, <br/> { user.name}</Name>
       {isLoading ? (
         <Button fullWidth variant="contained">
           <Puff height={24} stroke="#fff" style={{ padding: '0 16px' }} />

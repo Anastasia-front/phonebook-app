@@ -18,14 +18,14 @@ const Items = () => {
   return (
     <List>
       {visibleTasks.length ? (
-        visibleTasks.map(({ id, name, number }) => (
-          <Li key={id}>
-            <Contact id={id} name={name} number={number} />
+        visibleTasks.map(({ _id, name, number }) => (
+          <Li key={_id}>
+            <Contact id={_id} name={name} number={number} />
           </Li>
         ))
       ) : (
         <h3 style={{ textAlign: 'center', marginLeft: 70 }}>
-          There are no contacts in your phonebook
+          There are no contacts in your phoneBook
         </h3>
       )}
     </List>
